@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Github, Linkedin, Instagram, Download } from 'lucide-react'
+import { Github, Linkedin, Instagram, Download, Code } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -9,6 +9,8 @@ export default function HeroPortfolio() {
     const text = " I'm a Software Developer"
     const [typingText, setTypingText] = useState('')
     const [imageLoaded, setImageLoaded] = useState(false)
+    const [currentTech, setCurrentTech] = useState(0) // <-- Fixed missing state
+
     const techStacks = [
         "React · Next.js · TypeScript",
         "Node.js · Express · MongoDB",
@@ -23,6 +25,7 @@ export default function HeroPortfolio() {
             index++
             if (index === text.length) clearInterval(interval)
         }, 50)
+
         const techInterval = setInterval(() => {
             setCurrentTech(prev => (prev + 1) % techStacks.length)
         }, 3000)
@@ -48,6 +51,7 @@ export default function HeroPortfolio() {
                         {typingText}
                         <span className="inline-block w-1 h-6 ml-1 bg-[#C2CABB] animate-blink"></span>
                     </h2>
+
                     {/* Tech Stack Carousel */}
                     <div className="h-6 overflow-hidden mt-2">
                         <div className="transition-transform duration-500" style={{ transform: `translateY(-${currentTech * 100}%)` }}>
@@ -59,6 +63,7 @@ export default function HeroPortfolio() {
                             ))}
                         </div>
                     </div>
+
                     <p className="text-[#C2CABB]/70 text-base sm:text-lg leading-relaxed max-w-md mx-auto md:mx-0">
                         I'm a passionate Full-Stack Developer creating responsive and user-friendly websites and applications using modern web technologies.
                     </p>
