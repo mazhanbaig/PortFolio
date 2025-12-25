@@ -65,19 +65,19 @@ export default function AboutSection() {
                     </div>
 
                     {/* Tech Stack */}
-                    <div className="mt-8 bg-[#10120F]/90 p-6 rounded-2xl border border-[#C2CABB]/20">
+                    {/* <div className="mt-8 bg-[#10120F]/90 p-6 rounded-2xl border border-[#C2CABB]/20">
                         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2"><Code className="w-5 h-5" /> Current Tech Stack</h3>
                         <div className="flex flex-wrap gap-2">
                             {["HTML/CSS", "JS/TS", "React", "Next.js", "Node.js", "Express", "MongoDB", "Tailwind CSS", "React Native"].map((tech, idx) => (
                                 <span key={idx} className="px-3 py-1.5 bg-[#C2CABB]/10 border border-[#C2CABB]/20 rounded-full text-sm hover:bg-[#C2CABB]/20 hover:text-white transition">{tech}</span>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Right Column - Image & Facts */}
                 <div className="flex-1 flex flex-col gap-8">
-                    {/* Profile Image */}
+                    {/* Profile Image
                     <div className="relative w-full max-w-md h-50 mx-auto rounded-3xl overflow-hidden border border-[#C2CABB]/20 shadow-2xl">
                         <Image
                             src="/aboutmelogo.jpg"
@@ -86,7 +86,7 @@ export default function AboutSection() {
                             height={300}
                             className="object-cover w-full h-full rounded-3xl"
                         />
-                    </div>
+                    </div> */}
 
                     {/* Quick Facts */}
                     <div className="grid grid-cols-2 gap-4">

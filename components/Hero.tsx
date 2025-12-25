@@ -9,7 +9,7 @@ export default function HeroPortfolio() {
     const text = " I'm a Software Developer"
     const [typingText, setTypingText] = useState('')
     const [imageLoaded, setImageLoaded] = useState(false)
-    const [currentTech, setCurrentTech] = useState(0) // <-- Fixed missing state
+    const [currentTech, setCurrentTech] = useState(0)
 
     const techStacks = [
         "React · Next.js · TypeScript",
@@ -21,7 +21,7 @@ export default function HeroPortfolio() {
     useEffect(() => {
         let index = 0
         const interval = setInterval(() => {
-            setTypingText((prev) => prev + text.charAt(index))
+            setTypingText(prev => prev + text.charAt(index))
             index++
             if (index === text.length) clearInterval(interval)
         }, 50)
@@ -37,48 +37,52 @@ export default function HeroPortfolio() {
     }, [])
 
     return (
-        <section className="relative w-full min-h-screen flex items-center px-4 sm:px-6 md:px-8 bg-[#10120F] text-[#C2CABB]">
+        <section className="relative w-full min-h-screen flex items-center px-4 sm:px-6 md:px-8 bg-white text-gray-900">
 
-            <div className="relative max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="relative max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-                {/* Left Side - Text */}
-                <div className="space-y-4 md:space-y-6 text-center md:text-left">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+                {/* Left Side */}
+                <div className="space-y-5 text-center md:text-left">
+                    <h1 className="text-[#696f64] text-4xl md:text-5xl font-bold">
                         Muhammad Azhan
                     </h1>
 
-                    <h2 className="text-lg sm:text-xl md:text-2xl font-medium text-[#C2CABB]/90">
+                    <h2 className="text-xl md:text-2xl font-medium text-gray-700">
                         {typingText}
-                        <span className="inline-block w-1 h-6 ml-1 bg-[#C2CABB] animate-blink"></span>
+                        <span className="inline-block w-1 h-6 ml-1 bg-gray-900 animate-blink"></span>
                     </h2>
 
-                    {/* Tech Stack Carousel */}
+                    {/* Tech Stack */}
                     <div className="h-6 overflow-hidden mt-2">
-                        <div className="transition-transform duration-500" style={{ transform: `translateY(-${currentTech * 100}%)` }}>
+                        <div
+                            className="transition-transform duration-500"
+                            style={{ transform: `translateY(-${currentTech * 100}%)` }}
+                        >
                             {techStacks.map((tech, i) => (
                                 <div key={i} className="h-6 flex items-center gap-2">
-                                    <Code className="w-4 h-4 text-[#C2CABB]/70" />
-                                    <span className="text-[#C2CABB]/80">{tech}</span>
+                                    <Code className="w-4 h-4 text-gray-500" />
+                                    <span className="text-gray-600">{tech}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    <p className="text-[#C2CABB]/70 text-base sm:text-lg leading-relaxed max-w-md mx-auto md:mx-0">
-                        I'm a passionate Full-Stack Developer creating responsive and user-friendly websites and applications using modern web technologies.
+                    <p className="text-gray-600 text-lg leading-relaxed max-w-md mx-auto md:mx-0">
+                        I'm a passionate Full-Stack Developer creating responsive and
+                        user-friendly websites and applications using modern web technologies.
                     </p>
 
                     {/* Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-3 mt-4">
+                    <div className="flex flex-col sm:flex-row gap-4 mt-4">
                         <a
                             href="/cv.pdf"
-                            className="flex items-center gap-2 px-6 py-2 bg-[#C2CABB] text-[#10120F] font-medium rounded-full hover:bg-[#C2CABB]/90 transition"
+                            className="flex items-center justify-center gap-2 px-6 py-2 bg-gray-900 text-white font-medium rounded-full hover:bg-gray-800 transition"
                         >
                             <Download className="w-4 h-4" /> Download CV
                         </a>
                         <Link
                             href="#projects"
-                            className="px-6 py-2 border border-[#C2CABB]/50 text-[#C2CABB] font-medium rounded-full hover:bg-[#C2CABB]/10 transition"
+                            className="px-6 py-2 border border-gray-300 text-gray-800 font-medium rounded-full hover:bg-gray-100 transition text-center"
                         >
                             View Projects
                         </Link>
@@ -86,31 +90,34 @@ export default function HeroPortfolio() {
 
                     {/* Socials */}
                     <div className="flex gap-4 mt-4 justify-center md:justify-start">
-                        {[{ icon: Github, href: "https://github.com" },
-                        { icon: Linkedin, href: "https://linkedin.com" },
+                        {[{ icon: Github, href: "https://github.com/mazhanbaig" },
+                        { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-azhan-baig-a3b46a288" },
                         { icon: Instagram, href: "https://instagram.com" }].map((social, idx) => (
-                            <Link key={idx} href={social.href} target="_blank" className="p-2 rounded-full hover:bg-[#C2CABB]/10 transition">
-                                <social.icon className="w-5 h-5 text-[#C2CABB]" />
+                            <Link
+                                key={idx}
+                                href={social.href}
+                                target="_blank"
+                                className="p-2 rounded-full hover:bg-gray-100 transition"
+                            >
+                                <social.icon className="w-5 h-5 text-gray-700" />
                             </Link>
                         ))}
                     </div>
                 </div>
 
-                {/* Right Side - Profile Image */}
+                {/* Right Side Image */}
                 <div className="flex justify-center md:justify-end">
-                    <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-[#C2CABB]/50 shadow-md">
+                    <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-[#696f64] shadow-lg">
                         <Image
                             src="/Me.jpg"
                             alt="Muhammad Azhan"
                             fill
-                            className={`object-cover transition-all duration-500 rounded-full ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            className={`object-cover rounded-full transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+                                }`}
                             onLoad={() => setImageLoaded(true)}
                         />
-                        {/* Soft glow effect */}
-                        <div className="absolute inset-0 rounded-full bg-[#C2CABB]/10 blur-xl"></div>
                     </div>
                 </div>
-
             </div>
 
             <style jsx>{`
@@ -125,3 +132,5 @@ export default function HeroPortfolio() {
         </section>
     )
 }
+
+// border - [#C2CABB] / 50
