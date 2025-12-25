@@ -6,7 +6,7 @@ import { Menu, X, Home, User, Code, Folder, Mail, ArrowRight, Sparkles } from 'l
 const navItems = [
     { name: 'Home', href: '#home', icon: Home },
     { name: 'About', href: '#about', icon: User },
-    { name: 'Skills', href: '#skills', icon: Code },
+    // { name: 'Skills', href: '#skills', icon: Code },
     { name: 'Projects', href: '#projects', icon: Folder },
     { name: 'Contact', href: '#contact', icon: Mail },
 ]

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function HeroPortfolio() {
-    const text = " I'm a Software Developer"
+    const text = " I'm a Software  Developer"
     const [typingText, setTypingText] = useState('')
     const [imageLoaded, setImageLoaded] = useState(false)
     const [currentTech, setCurrentTech] = useState(0)
