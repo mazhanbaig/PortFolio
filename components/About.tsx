@@ -54,7 +54,7 @@ export default function AboutSection() {
                     {/* Info Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {cards.map((card, idx) => (
-                            <div key={idx} className={`bg-[#10120F]/80 border border-[#C2CABB]/20 p-5 rounded-2xl transition hover:border-[#C2CABB]/40 shadow-sm`}>
+                            <div key={idx} className={`bg-[#10120F]/90 border border-[#C2CABB]/20 p-5 rounded-2xl transition hover:border-[#C2CABB]/40 shadow-sm`}>
                                 <div className="flex items-center gap-3 mb-3">
                                     <card.icon className="w-5 h-5 text-[#C2CABB]" />
                                     <h3 className="font-semibold text-lg">{card.title}</h3>
