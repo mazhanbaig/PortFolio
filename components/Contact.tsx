@@ -38,7 +38,7 @@ export default function ContactSection() {
                             <Mail className="w-5 h-5 text-[#696f64]" />
                         </div>
                         <p className="text-gray-900 font-medium">Email</p>
-                        <p className="text-gray-600 text-sm mt-1">mazhanbaig@example.com</p>
+                        <p className="text-gray-600 text-sm mt-1">mazhanbaig44@gmail.com</p>
                     </div>
 
                     <div className="flex flex-col items-center">
@@ -46,7 +46,7 @@ export default function ContactSection() {
                             <Phone className="w-5 h-5 text-[#696f64]" />
                         </div>
                         <p className="text-gray-900 font-medium">Phone</p>
-                        <p className="text-gray-600 text-sm mt-1">+92 300 1234567</p>
+                        <p className="text-gray-600 text-sm mt-1">+92 322 6045971</p>
                     </div>
 
                     <div className="flex flex-col items-center">
