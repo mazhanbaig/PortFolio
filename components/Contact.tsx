@@ -32,7 +32,7 @@ export default function ContactSection() {
                 </div>
 
                 {/* Contact Info */}
-                <div className="grid sm:grid-cols-3 gap-12 mb-12">
+                <div className="px-2 grid grid-cols-2 sm:grid-cols-3 gap-3 mb-12">
                     <div className="flex flex-col items-center">
                         <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-3">
                             <Mail className="w-5 h-5 text-[#696f64]" />
