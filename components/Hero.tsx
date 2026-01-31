@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function HeroPortfolio() {
-    const text = " I'm a Software  Developer"
+    const text = "  I'm a Software  Developer"
     const [typingText, setTypingText] = useState('')
     const [imageLoaded, setImageLoaded] = useState(false)
     const [currentTech, setCurrentTech] = useState(0)
@@ -39,11 +39,11 @@ export default function HeroPortfolio() {
     return (
         <section className="relative w-full min-h-screen flex items-center px-4 sm:px-6 md:px-8 bg-white text-gray-900">
 
-            <div className="relative max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="relative top-30 sm:top-30 md:top-7 lg:top-5 sm:left-3 lg:-left-5 max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
                 {/* Left Side */}
                 <div className="space-y-5 text-center md:text-left">
-                    <h1 className="text-[#696f64] text-4xl md:text-5xl font-bold">
+                    <h1 className="text-[#696f64] text-5xl md:text-5xl font-bold">
                         Muhammad Azhan
                     </h1>
 
@@ -52,7 +52,7 @@ export default function HeroPortfolio() {
                         <span className="inline-block w-1 h-6 ml-1 bg-gray-900 animate-blink"></span>
                     </h2>
 
-                    {/* Tech Stack */}
+                    {/* Tech Stack
                     <div className="h-6 overflow-hidden mt-2">
                         <div
                             className="transition-transform duration-500"
@@ -65,7 +65,7 @@ export default function HeroPortfolio() {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
 
                     <p className="text-gray-600 text-lg leading-relaxed max-w-md mx-auto md:mx-0">
                         I'm a passionate Full-Stack Developer creating responsive and
@@ -73,7 +73,7 @@ export default function HeroPortfolio() {
                     </p>
 
                     {/* Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                    <div className="flex justify-center md:justify-start gap-4 mt-4">
                         <a
                             href="/cv.pdf"
                             className="flex items-center justify-center gap-2 px-6 py-2 bg-gray-900 text-white font-medium rounded-full hover:bg-gray-800 transition"
