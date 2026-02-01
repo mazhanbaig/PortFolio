@@ -39,7 +39,7 @@ export default function HeroPortfolio() {
     return (
         <section className="relative w-full min-h-screen flex items-center px-4 sm:px-6 md:px-8 bg-white text-gray-900">
 
-            <div className="relative top-30 sm:top-30 md:top-7 lg:top-5 sm:left-3 lg:-left-5 max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="relative top-15 sm:top-30 md:top-7 lg:top-5 sm:left-3 lg:-left-5 max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
                 {/* Left Side */}
                 <div className="space-y-5 text-center md:text-left">
