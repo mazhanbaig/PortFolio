@@ -1,18 +1,20 @@
+// app/page.tsx
 import Hero from '@/components/Hero'
-import { Code2, Palette, Zap, Globe } from 'lucide-react'
 import About from '@/components/About'
+import Skills from '@/components/Skills'
 import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
+import Experience from '@/components/Experience'
 
 export default function Home() {
   return (
-    <>
-      <div className='bg-white'>
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-      </div>
-    </>
+    <main className="bg-white">
+      <Hero />
+      <About />
+      <Skills />
+      <Experience />
+      <Projects />
+      <Contact />
+    </main>
   )
 }

@@ -1,34 +1,38 @@
 'use client'
 
 import Image from 'next/image'
-import { Github, Linkedin, Instagram, Download, Code } from 'lucide-react'
+import { Github, Linkedin, Instagram, Download, Code, Award, Briefcase, MapPin, Mail, Sparkles, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function HeroPortfolio() {
-    const text = "  I'm a Software  Developer"
     const [typingText, setTypingText] = useState('')
     const [imageLoaded, setImageLoaded] = useState(false)
     const [currentTech, setCurrentTech] = useState(0)
+    const [showFullText, setShowFullText] = useState(false)
 
+    const fullText = " Full-Stack Developer"
     const techStacks = [
-        "React · Next.js · TypeScript",
-        "Node.js · Express · MongoDB",
-        "Tailwind · React Native",
-        "Full Stack Development"
+        "React.js · Next.js · TypeScript",
+        "Node.js · Express.js · NestJS",
+        "MongoDB · Firebase · PostgreSQL",
+        "Tailwind · React Native · Docker"
     ]
 
     useEffect(() => {
         let index = 0
         const interval = setInterval(() => {
-            setTypingText(prev => prev + text.charAt(index))
+            setTypingText(prev => prev + fullText.charAt(index))
             index++
-            if (index === text.length) clearInterval(interval)
-        }, 50)
+            if (index === fullText.length) {
+                clearInterval(interval)
+                setShowFullText(true)
+            }
+        }, 100)
 
         const techInterval = setInterval(() => {
             setCurrentTech(prev => (prev + 1) % techStacks.length)
-        }, 3000)
+        }, 2500)
 
         return () => {
             clearInterval(interval)
@@ -36,87 +40,187 @@ export default function HeroPortfolio() {
         }
     }, [])
 
+    const scrollToContact = () => {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    const stats = [
+        { icon: Briefcase, value: "2+", label: "Years Experience" },
+        { icon: Code, value: "5+", label: "Projects Delivered" },
+        { icon: Award, value: "94%", label: "SCS Distinction" }
+    ]
+
     return (
-        <section className="relative w-full min-h-screen flex items-center px-4 sm:px-6 md:px-8 bg-white text-gray-900">
+        <section id="home" className="relative w-full min-h-screen flex items-center bg-gradient-to-br from-white via-gray-50 to-white overflow-hidden">
 
-            <div className="relative top-15 sm:top-30 md:top-7 lg:top-5 sm:left-3 lg:-left-5 max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            {/* Background Decorative Elements */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-20 left-10 w-72 h-72 bg-[#696f64]/5 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#696f64]/3 rounded-full blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-[#696f64]/5 to-transparent rounded-full blur-3xl"></div>
 
-                {/* Left Side */}
-                <div className="space-y-5 text-center md:text-left">
-                    <h1 className="text-[#696f64] text-5xl md:text-5xl font-bold">
-                        Muhammad Azhan
-                    </h1>
+                {/* Grid Pattern */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(105,111,100,0.03)_1px,transparent_0)] bg-[size:40px_40px]"></div>
+            </div>
 
-                    <h2 className="text-xl md:text-2xl font-medium text-gray-700">
-                        {typingText}
-                        <span className="inline-block w-1 h-6 ml-1 bg-gray-900 animate-blink"></span>
-                    </h2>
+            <div className="relative max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-20">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-                    {/* Tech Stack
-                    <div className="h-6 overflow-hidden mt-2">
-                        <div
-                            className="transition-transform duration-500"
-                            style={{ transform: `translateY(-${currentTech * 100}%)` }}
-                        >
-                            {techStacks.map((tech, i) => (
-                                <div key={i} className="h-6 flex items-center gap-2">
-                                    <Code className="w-4 h-4 text-gray-500" />
-                                    <span className="text-gray-600">{tech}</span>
+                    {/* Left Side - Content */}
+                    <div className="space-y-6">
+                        {/* Badge */}
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#696f64]/10 rounded-full w-fit">
+                            <Sparkles className="w-4 h-4 text-[#696f64]" />
+                            <span className="text-sm font-medium text-[#696f64]">Available for opportunities</span>
+                        </div>
+
+                        {/* Name */}
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                            Muhammad <span className="text-[#696f64]">Azhan</span> Baig
+                        </h1>
+
+                        {/* Typing Title */}
+                        <div className="h-12">
+                            <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700">
+                                {typingText}
+                                <span className="inline-block w-1 h-7 ml-1 bg-[#696f64] animate-blink"></span>
+                            </h2>
+                        </div>
+
+                        {/* Animated Tech Stack */}
+                        <div className="h-8 overflow-hidden">
+                            <div
+                                className="transition-transform duration-500 ease-in-out"
+                                style={{ transform: `translateY(-${currentTech * 100}%)` }}
+                            >
+                                {techStacks.map((tech, i) => (
+                                    <div key={i} className="h-8 flex items-center gap-2">
+                                        <Code className="w-4 h-4 text-[#696f64]" />
+                                        <span className="text-gray-600 text-sm sm:text-base">{tech}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-lg">
+                            Results-driven Full-Stack Developer with 2+ years of experience architecting
+                            and shipping production-grade web and mobile applications. I build scalable,
+                            high-performance solutions with modern technologies.
+                        </p>
+
+                        {/* Stats */}
+                        <div className="flex gap-6 pt-2">
+                            {stats.map((stat, idx) => (
+                                <div key={idx} className="text-center">
+                                    <div className="text-2xl sm:text-3xl font-bold text-[#696f64]">{stat.value}</div>
+                                    <div className="text-xs sm:text-sm text-gray-500">{stat.label}</div>
                                 </div>
                             ))}
                         </div>
-                    </div> */}
 
-                    <p className="text-gray-600 text-lg leading-relaxed max-w-md mx-auto md:mx-0">
-                        I'm a passionate Full-Stack Developer creating responsive and
-                        user-friendly websites and applications using modern web technologies.
-                    </p>
+                        {/* CTA Buttons */}
+                        <div className="flex flex-wrap gap-4 pt-2">
+                            <a
+                                href="/cv.pdf"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-[#696f64] text-white font-medium rounded-full hover:bg-[#555b4f] transition-all duration-300 shadow-md hover:shadow-lg"
+                            >
+                                <Download className="w-4 h-4" />
+                                Download CV
+                            </a>
+                            <Link
+                                href="#projects"
+                                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-[#696f64] text-[#696f64] font-medium rounded-full hover:bg-[#696f64] hover:text-white transition-all duration-300"
+                            >
+                                View Projects
+                                <ChevronDown className="w-4 h-4" />
+                            </Link>
+                            <button
+                                onClick={scrollToContact}
+                                className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-full hover:bg-gray-100 transition-all duration-300"
+                            >
+                                <Mail className="w-4 h-4" />
+                                Hire Me
+                            </button>
+                        </div>
 
-                    {/* Buttons */}
-                    <div className="flex justify-center md:justify-start gap-4 mt-4">
-                        <a
-                            href="/cv.pdf"
-                            className="flex items-center justify-center gap-2 px-6 py-2 bg-gray-900 text-white font-medium rounded-full hover:bg-gray-800 transition"
-                        >
-                            <Download className="w-4 h-4" /> Download CV
-                        </a>
-                        <Link
-                            href="#projects"
-                            className="px-6 py-2 border border-gray-300 text-gray-800 font-medium rounded-full hover:bg-gray-100 transition text-center"
-                        >
-                            View Projects
-                        </Link>
+                        {/* Social Links */}
+                        <div className="flex gap-3 pt-4">
+                            <a
+                                href="https://github.com/mazhanbaig"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2.5 rounded-full bg-gray-100 text-gray-700 hover:bg-[#696f64] hover:text-white transition-all duration-300"
+                                aria-label="GitHub"
+                            >
+                                <Github className="w-5 h-5" />
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/muhammad-azhan-baig-a3b46a288"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2.5 rounded-full bg-gray-100 text-gray-700 hover:bg-[#696f64] hover:text-white transition-all duration-300"
+                                aria-label="LinkedIn"
+                            >
+                                <Linkedin className="w-5 h-5" />
+                            </a>
+                            <a
+                                href="https://instagram.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2.5 rounded-full bg-gray-100 text-gray-700 hover:bg-[#696f64] hover:text-white transition-all duration-300"
+                                aria-label="Instagram"
+                            >
+                                <Instagram className="w-5 h-5" />
+                            </a>
+                            <div className="w-px h-8 bg-gray-200 mx-1"></div>
+                            <div className="flex items-center gap-2 text-sm text-gray-500">
+                                <MapPin className="w-4 h-4" />
+                                <span>Karachi, Pakistan</span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Socials */}
-                    <div className="flex gap-4 mt-4 justify-center md:justify-start">
-                        {[{ icon: Github, href: "https://github.com/mazhanbaig" },
-                        { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-azhan-baig-a3b46a288" },
-                        { icon: Instagram, href: "https://instagram.com" }].map((social, idx) => (
-                            <Link
-                                key={idx}
-                                href={social.href}
-                                target="_blank"
-                                className="p-2 rounded-full hover:bg-gray-100 transition"
-                            >
-                                <social.icon className="w-5 h-5 text-gray-700" />
-                            </Link>
-                        ))}
+                    {/* Right Side - Image & Badges */}
+                    <div className="relative flex justify-center lg:justify-end">
+                        <div className="relative">
+                            {/* Decorative rings */}
+                            <div className="absolute -top-4 -left-4 w-full h-full rounded-full border-2 border-[#696f64]/20 animate-pulse-slow"></div>
+                            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-full border-2 border-[#696f64]/10"></div>
+
+                            {/* Main Image */}
+                            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl bg-gradient-to-br from-gray-100 to-gray-200">
+                                <Image
+                                    src="/Me.jpg"
+                                    alt="Muhammad Azhan Baig - Full-Stack Developer"
+                                    fill
+                                    className={`object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                    onLoad={() => setImageLoaded(true)}
+                                    priority
+                                />
+                            </div>
+
+                            {/* Floating Badges */}
+                            <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 bg-white rounded-xl shadow-lg p-2 sm:p-3 animate-float">
+                                <div className="flex items-center gap-2">
+                                    <Code className="w-4 h-4 text-[#696f64]" />
+                                    <span className="text-xs sm:text-sm font-medium text-gray-900">Full-Stack</span>
+                                </div>
+                            </div>
+                            <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 bg-white rounded-xl shadow-lg p-2 sm:p-3 animate-float-delayed">
+                                <div className="flex items-center gap-2">
+                                    <Award className="w-4 h-4 text-[#696f64]" />
+                                    <span className="text-xs sm:text-sm font-medium text-gray-900">94% SCS</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {/* Right Side Image */}
-                <div className="flex justify-center md:justify-end">
-                    <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-[#696f64] shadow-lg">
-                        <Image
-                            src="/Me.jpg"
-                            alt="Muhammad Azhan"
-                            fill
-                            className={`object-cover rounded-full transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'
-                                }`}
-                            onLoad={() => setImageLoaded(true)}
-                        />
-                    </div>
+                {/* Scroll Indicator */}
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce-slow">
+                    <span className="text-xs text-gray-400">Scroll to explore</span>
+                    <ChevronDown className="w-4 h-4 text-gray-400" />
                 </div>
             </div>
 
@@ -128,9 +232,31 @@ export default function HeroPortfolio() {
                 .animate-blink {
                     animation: blink 1s infinite;
                 }
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
+                .animate-float {
+                    animation: float 4s ease-in-out infinite;
+                }
+                .animate-float-delayed {
+                    animation: float 4s ease-in-out infinite 1s;
+                }
+                @keyframes bounce-slow {
+                    0%, 100% { transform: translateY(0px) translateX(-50%); }
+                    50% { transform: translateY(10px) translateX(-50%); }
+                }
+                .animate-bounce-slow {
+                    animation: bounce-slow 2s ease-in-out infinite;
+                }
+                @keyframes pulse-slow {
+                    0%, 100% { opacity: 0.3; transform: scale(1); }
+                    50% { opacity: 0.6; transform: scale(1.05); }
+                }
+                .animate-pulse-slow {
+                    animation: pulse-slow 3s ease-in-out infinite;
+                }
             `}</style>
         </section>
     )
 }
-
-// border - [#C2CABB] / 50

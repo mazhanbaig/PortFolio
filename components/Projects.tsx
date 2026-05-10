@@ -19,13 +19,13 @@ export default function ProjectsSection() {
             github: 'https://github.com/mazhanbaig/RSMS',
             featured: true
         },
-        {
-            title: 'Portfolio Website',
-            desc: 'Minimal portfolio focused on typography, performance, and clarity.',
-            tech: ['Next.js', 'Tailwind'],
-            live: 'mazhanbaig.vercel.app',
-            github: 'https://github.com/mazhanbaig/PortFolio'
-        },
+        // {
+        //     title: 'Portfolio Website',
+        //     desc: 'Minimal portfolio focused on typography, performance, and clarity.',
+        //     tech: ['Next.js', 'Tailwind'],
+        //     live: 'mazhanbaig.vercel.app',
+        //     github: 'https://github.com/mazhanbaig/PortFolio'
+        // },
     ]
 
     return (

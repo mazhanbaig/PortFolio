@@ -1,6 +1,7 @@
+// components/Skills.tsx (Professional Design - No Percentages)
 'use client'
 
-import { Code, Server, Database, Palette, Smartphone, Cloud, GitBranch, Terminal, Shield, Zap, Layers, Cpu } from 'lucide-react'
+import { Code, Server, Palette, Smartphone, Layers, Zap, Cpu, GitBranch, Cloud, Shield, Database, Terminal, CheckCircle2, Circle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function SkillsSection() {
@@ -12,178 +13,197 @@ export default function SkillsSection() {
 
     const skillCategories = [
         {
-            title: "Frontend",
+            title: "Frontend Development",
             icon: Palette,
-            color: "from-[#C2CABB] to-[#C2CABB]/70",
+            description: "Building responsive, interactive user interfaces",
             skills: [
-                { name: "HTML/CSS", level: 95, color: "bg-gradient-to-r from-[#C2CABB] to-[#C2CABB]/80" },
-                { name: "JavaScript", level: 90, color: "bg-gradient-to-r from-[#C2CABB] to-[#C2CABB]/70" },
-                { name: "React.js", level: 85, color: "bg-gradient-to-r from-[#C2CABB] to-[#C2CABB]/60" },
-                { name: "Next.js", level: 85, color: "bg-gradient-to-r from-[#C2CABB] to-[#C2CABB]/50" },
-                { name: "Tailwind CSS", level: 95, color: "bg-gradient-to-r from-[#C2CABB] to-[#C2CABB]/80" },
-                { name: "TypeScript", level: 80, color: "bg-gradient-to-r from-[#C2CABB] to-[#C2CABB]/40" }
+                { name: "React.js", level: "Advanced" },
+                { name: "Next.js", level: "Advanced" },
+                { name: "React Native", level: "Intermediate" },
+                { name: "TypeScript", level: "Intermediate" },
+                { name: "Tailwind CSS", level: "Expert" },
+                { name: "JavaScript", level: "Advanced" },
+                { name: "HTML/CSS", level: "Expert" },
             ]
         },
         {
-            title: "Backend",
+            title: "Backend Development",
             icon: Server,
-            color: "from-[#C2CABB]/90 to-[#C2CABB]/60",
+            description: "Creating scalable server-side applications",
             skills: [
-                { name: "Node.js", level: 'learning', color: "bg-gradient-to-r from-[#C2CABB]/90 to-[#C2CABB]/60" },
-                { name: "Express.js", level: 'learning', color: "bg-gradient-to-r from-[#C2CABB]/80 to-[#C2CABB]/50" },
-                { name: "REST APIs", level: 85, color: "bg-gradient-to-r from-[#C2CABB]/90 to-[#C2CABB]/60" },
-                { name: "MongoDB", level: 'learning', color: "bg-gradient-to-r from-[#C2CABB]/70 to-[#C2CABB]/40" },
-                { name: "Authentication", level: 'learning', color: "bg-gradient-to-r from-[#C2CABB]/80 to-[#C2CABB]/50" },
-                { name: "Firebase", level: 80, color: "bg-gradient-to-r from-[#C2CABB]/60 to-[#C2CABB]/30" }
+                { name: "Node.js", level: "Advanced" },
+                { name: "Express.js", level: "Advanced" },
+                { name: "NestJS", level: "Advanced" },
+                { name: "REST APIs", level: "Advanced" },
+                { name: "JWT Authentication", level: "Advanced" },
+                { name: "Firebase", level: "Advanced" },
             ]
         },
         {
-            title: "Mobile & Tools",
-            icon: Smartphone,
-            color: "from-[#C2CABB]/80 to-[#C2CABB]/50",
+            title: "Database & DevOps",
+            icon: Database,
+            description: "Managing data and deployment workflows",
             skills: [
-                { name: "React Native", level: 'learning', color: "bg-gradient-to-r from-[#C2CABB]/80 to-[#C2CABB]/50" },
-                { name: "Git/GitHub", level: 90, color: "bg-gradient-to-r from-[#C2CABB]/90 to-[#C2CABB]/60" },
-                { name: "VS Code", level: 95, color: "bg-gradient-to-r from-[#C2CABB] to-[#C2CABB]/80" },
+                { name: "MongoDB", level: "Advanced" },
+                { name: "Mongoose", level: "Advanced" },
+                { name: "Git/GitHub", level: "Expert" },
+                { name: "Docker", level: "Intermediate" },
+                { name: "Vercel", level: "Expert" },
             ]
         }
     ]
 
-    const additionalSkills = [
-        { name: "Responsive Design", icon: Layers, level: "Expert" },
-        { name: "Performance", icon: Zap, level: "Advanced" },
-        { name: "Problem Solving", icon: Cpu, level: "Expert" },
-        { name: "UI/UX Design", icon: Palette, level: "Intermediate" },
-        { name: "Version Control", icon: GitBranch, level: "Advanced" },
-        { name: "Testing", icon: Shield, level: "Intermediate" },
-        { name: "Deployment", icon: Cloud, level: "Advanced" },
-        { name: "CLI", icon: Terminal, level: "Intermediate" }
+    const getLevelColor = (level: string) => {
+        switch (level) {
+            case 'Expert': return 'bg-emerald-500'
+            case 'Advanced': return 'bg-blue-500'
+            case 'Intermediate': return 'bg-amber-500'
+            default: return 'bg-gray-400'
+        }
+    }
+
+    const getLevelIcon = (level: string) => {
+        switch (level) {
+            case 'Expert': return <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+            case 'Advanced': return <CheckCircle2 className="w-3.5 h-3.5 text-blue-500" />
+            case 'Intermediate': return <Circle className="w-3.5 h-3.5 text-amber-500" />
+            default: return <Circle className="w-3.5 h-3.5 text-gray-400" />
+        }
+    }
+
+    const coreCompetencies = [
+        { name: "Problem Solving", icon: Cpu, description: "Breaking down complex challenges" },
+        { name: "Clean Code", icon: Layers, description: "Maintainable & scalable architecture" },
+        { name: "Performance", icon: Zap, description: "Optimizing load times & efficiency" },
+        { name: "Version Control", icon: GitBranch, description: "Collaborative development workflow" },
+        { name: "Deployment", icon: Cloud, description: "CI/CD & production releases" },
+        { name: "UI/UX Sense", icon: Palette, description: "User-centered design thinking" },
+        { name: "Testing", icon: Shield, description: "Reliable & bug-free code" },
+        { name: "Documentation", icon: Terminal, description: "Clear technical writing" },
     ]
 
     return (
-        <section
-            id="skills"
-            className="relative w-full min-h-screen py-16 md:py-24 bg-[#10120F] overflow-hidden"
-        >
-            {/* Background Effects */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-[#C2CABB]/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#C2CABB]/5 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
-            </div>
-
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(194,202,187,0.02)_1px,transparent_0)] bg-[size:40px_40px] opacity-5"></div>
-
-            <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Section Header */}
-                <div className={`text-center mb-16 transition-all duration-700 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-[#C2CABB]/5 border border-[#C2CABB]/10 rounded-full">
-                        <Code className="w-4 h-4 text-[#C2CABB]" />
-                        <span className="text-sm font-semibold text-[#C2CABB] tracking-wider">SKILLS & TECHNOLOGIES</span>
+        <section id="skills" className="bg-gray-50 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+                {/* Header */}
+                <div className="text-center mb-12">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full mb-4 shadow-sm">
+                        <Code className="w-4 h-4 text-[#696f64]" />
+                        <span className="text-sm font-medium text-gray-700">
+                            Technical Expertise
+                        </span>
                     </div>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#C2CABB] mb-6">
-                        What I Work With
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        What I Bring to the Table
                     </h2>
-                    <p className="text-lg text-[#C2CABB]/80 max-w-2xl mx-auto leading-relaxed">
-                        I specialize in modern web technologies and continuously expand my skill set to
-                        build better, faster, and more efficient applications.
+                    <p className="text-gray-600 max-w-2xl mx-auto">
+                        A comprehensive toolkit for building modern, production-ready applications
                     </p>
                 </div>
 
-                {/* Main Skills Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    {skillCategories.map((category, index) => (
+                {/* Skills Grid - New Design */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                    {skillCategories.map((category, idx) => (
                         <div
-                            key={index}
-                            className={`transition-all duration-700 delay-${index * 100} ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                                }`}
+                            key={idx}
+                            className={`bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-500 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                            style={{ transitionDelay: `${idx * 100}ms` }}
                         >
-                            <div className="bg-gradient-to-br from-[#C2CABB]/5 to-transparent p-6 rounded-2xl border border-[#C2CABB]/10 h-full hover:border-[#C2CABB]/30 transition-all duration-300 group">
-                                {/* Category Header */}
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="p-2 bg-gradient-to-br from-[#C2CABB]/10 to-transparent rounded-lg group-hover:bg-gradient-to-br group-hover:from-[#C2CABB]/20 group-hover:to-transparent transition duration-300">
-                                        <category.icon className="w-6 h-6 text-[#C2CABB]" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-[#C2CABB]">{category.title}</h3>
-                                        <div className="h-0.5 w-12 bg-gradient-to-r from-[#C2CABB] to-transparent mt-1"></div>
-                                    </div>
+                            {/* Category Header */}
+                            <div className="flex items-start gap-3 mb-4">
+                                <div className="p-2.5 bg-gradient-to-br from-[#696f64]/10 to-[#696f64]/5 rounded-xl">
+                                    <category.icon className="w-6 h-6 text-[#696f64]" />
                                 </div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-gray-900">{category.title}</h3>
+                                    <p className="text-xs text-gray-500 mt-0.5">{category.description}</p>
+                                </div>
+                            </div>
 
-                                {/* Skills List with Progress Bars */}
-                                <div className="space-y-4">
-                                    {category.skills.map((skill, skillIndex) => (
-                                        <div key={skillIndex} className="space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-sm font-medium text-[#C2CABB]/90">{skill.name}</span>
-                                                <span className="text-xs text-[#C2CABB]/60">{skill.level}%</span>
-                                            </div>
-                                            <div className="h-1.5 bg-[#C2CABB]/10 rounded-full overflow-hidden">
-                                                <div
-                                                    className={`h-full rounded-full ${skill.color} transition-all duration-1000 ease-out ${animate ? 'w-full' : 'w-0'
-                                                        }`}
-                                                    style={{ width: animate ? `${skill.level}%` : '0%' }}
-                                                ></div>
-                                            </div>
+                            {/* Divider */}
+                            <div className="h-px bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 mb-4"></div>
+
+                            {/* Skills List */}
+                            <div className="flex flex-wrap gap-2">
+                                {category.skills.map((skill, skillIdx) => (
+                                    <div
+                                        key={skillIdx}
+                                        className="group relative"
+                                    >
+                                        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 rounded-full border border-gray-200 hover:border-[#696f64]/40 hover:bg-[#696f64]/5 transition-all duration-200">
+                                            {getLevelIcon(skill.level)}
+                                            <span className="text-sm font-medium text-gray-700">{skill.name}</span>
                                         </div>
-                                    ))}
-                                </div>
+                                        {/* Tooltip */}
+                                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+                                            {skill.level}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Additional Skills Grid */}
+                {/* Core Competencies - Redesigned */}
                 <div className={`transition-all duration-700 delay-300 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <div className="text-center mb-8">
-                        <h3 className="text-2xl font-bold text-[#C2CABB] mb-4">Additional Proficiencies</h3>
-                        <p className="text-[#C2CABB]/70 max-w-2xl mx-auto">
-                            Beyond specific technologies, I focus on these core competencies
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full mb-4 shadow-sm">
+                            <Zap className="w-4 h-4 text-[#696f64]" />
+                            <span className="text-sm font-medium text-gray-700">
+                                Beyond Technology
+                            </span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                            Core Competencies
+                        </h3>
+                        <p className="text-gray-600 max-w-2xl mx-auto">
+                            Professional skills that complement my technical abilities
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        {additionalSkills.map((skill, index) => (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {coreCompetencies.map((comp, idx) => (
                             <div
-                                key={index}
-                                className="bg-gradient-to-br from-[#C2CABB]/5 to-transparent p-4 rounded-xl border border-[#C2CABB]/10 hover:border-[#C2CABB]/30 transition-all duration-300 group"
+                                key={idx}
+                                className="group bg-white rounded-xl p-4 border border-gray-200 hover:border-[#696f64]/30 hover:shadow-md transition-all duration-300 cursor-default"
                             >
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="p-1.5 bg-gradient-to-br from-[#C2CABB]/10 to-transparent rounded-lg">
-                                        <skill.icon className="w-4 h-4 text-[#C2CABB]" />
+                                <div className="flex items-center gap-3 mb-2">
+                                    <div className="p-2 bg-gray-50 rounded-lg group-hover:bg-[#696f64]/5 transition-colors">
+                                        <comp.icon className="w-4 h-4 text-[#696f64]" />
                                     </div>
-                                    <div className="text-sm font-semibold text-[#C2CABB]">{skill.name}</div>
+                                    <h4 className="font-semibold text-gray-900 text-sm">{comp.name}</h4>
                                 </div>
-                                <div className="text-xs text-[#C2CABB]/60 bg-[#C2CABB]/5 px-2 py-1 rounded-full inline-block">
-                                    {skill.level}
-                                </div>
+                                <p className="text-xs text-gray-500 leading-relaxed">
+                                    {comp.description}
+                                </p>
                             </div>
                         ))}
                     </div>
                 </div>
-            </div>
 
-            {/* Floating Elements */}
-            <div className="absolute top-40 left-10 hidden lg:block">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#C2CABB]/10 to-transparent animate-float"></div>
-            </div>
-            <div className="absolute bottom-60 right-10 hidden lg:block">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#C2CABB]/5 to-transparent animate-float animation-delay-1000"></div>
+                {/* Learning & Growth Section */}
+                <div className={`mt-12 text-center transition-all duration-700 delay-500 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                    <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-white border border-gray-200 rounded-full shadow-sm">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                        <span className="text-sm text-gray-600">
+                            📚 Currently expanding:
+                            <span className="font-medium text-gray-900 ml-1">NestJS · Docker · GraphQL</span>
+                        </span>
+                    </div>
+                </div>
             </div>
 
             <style jsx>{`
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px) rotate(0deg); }
-                    50% { transform: translateY(-20px) rotate(10deg); }
-                }
-                .animate-float {
-                    animation: float 6s ease-in-out infinite;
-                }
-                .animation-delay-1000 {
-                    animation-delay: 1s;
-                }
-                .animation-delay-2000 {
-                    animation-delay: 2s;
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
                 }
             `}</style>
         </section>
