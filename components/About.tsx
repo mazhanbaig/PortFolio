@@ -36,7 +36,7 @@ export default function AboutSection() {
     return (
         <section
             id="about"
-            className="w-full bg-white py-1 px-4 sm:px-6 lg:px-8"
+            className="w-full bg-white py-1 mt-5 sm:mt-0 px-4 sm:px-6 lg:px-8"
         >
             <div className="max-w-6xl mx-auto">
 
@@ -90,7 +90,7 @@ export default function AboutSection() {
                             {stats.map((stat, idx) => (
                                 <div
                                     key={idx}
-                                    className="text-center p-2 py-4 border border-gray-200 rounded-xl hover:border-[#696f64]/60 transition"
+                                    className="text-center p-2 border border-gray-200 rounded-xl hover:border-[#696f64]/60 transition"
                                 >
                                     <stat.icon className="w-5 h-5 mx-auto mb-2 text-[#696f64]" />
                                     <div className="text-xl font-bold text-gray-900">
@@ -105,7 +105,7 @@ export default function AboutSection() {
                     </div>
 
                     {/* Right — Passions */}
-                    <div className={`space-y-6 transition-all duration-700 ${animated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'}`}>
+                    <div className={`space-y-3 transition-all duration-700 ${animated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'}`}>
                         <h3 className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
                             <span className="w-1.5 h-8 bg-[#696f64] rounded-full"></span>
                             What I Care About
@@ -114,7 +114,7 @@ export default function AboutSection() {
                         {passions.map((item, idx) => (
                             <div
                                 key={idx}
-                                className="flex items-start gap-4 p-5 rounded-xl border border-gray-200 hover:border-[#696f64]/60 transition"
+                                className="flex items-start gap-4 px-5 py-2 rounded-xl border border-gray-200 hover:border-[#696f64]/60 transition"
                             >
                                 <div className="p-3 rounded-lg bg-gray-100">
                                     <item.icon className="w-5 h-5 text-[#696f64]" />

@@ -26,13 +26,6 @@ export default function ProjectsSection() {
             live: 'mazhanbaig.vercel.app',
             github: 'https://github.com/mazhanbaig/PortFolio'
         },
-        // {
-        //     title: 'Auth Dashboard',
-        //     desc: 'Authentication-based dashboard with smooth UX and route protection.',
-        //     tech: ['React', 'Supabase'],
-        //     live: '#',
-        //     github: '#'
-        // }
     ]
 
     return (
@@ -66,7 +59,7 @@ export default function ProjectsSection() {
                     {projects.map((project, idx) => (
                         <div
                             key={idx}
-                            className={`rounded-2xl border p-6 transition ${project.featured
+                            className={`rounded-xl border px-6 py-4 transition ${project.featured
                                     ? 'border-[#696f64]/60 bg-gray-50'
                                     : 'border-gray-200'
                                 }`}
