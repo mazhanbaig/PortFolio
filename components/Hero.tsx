@@ -47,7 +47,7 @@ export default function HeroPortfolio() {
     const stats = [
         { icon: Briefcase, value: "2+", label: "Years Experience" },
         { icon: Code, value: "5+", label: "Projects Delivered" },
-        { icon: Award, value: "94%", label: "SCS Distinction" }
+        { icon: Award, value: "94%", label: "SSC Distinction" }
     ]
 
     return (
@@ -63,7 +63,7 @@ export default function HeroPortfolio() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(105,111,100,0.03)_1px,transparent_0)] bg-[size:40px_40px]"></div>
             </div>
 
-            <div className="relative max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-20">
+            <div className="relative max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-20">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                     {/* Left Side - Content */}
@@ -88,7 +88,7 @@ export default function HeroPortfolio() {
                         </div>
 
                         {/* Animated Tech Stack */}
-                        <div className="h-8 overflow-hidden">
+                        {/* <div className="h-8 overflow-hidden">
                             <div
                                 className="transition-transform duration-500 ease-in-out"
                                 style={{ transform: `translateY(-${currentTech * 100}%)` }}
@@ -100,7 +100,7 @@ export default function HeroPortfolio() {
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* Description */}
                         <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-lg">
@@ -210,7 +210,7 @@ export default function HeroPortfolio() {
                             <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 bg-white rounded-xl shadow-lg p-2 sm:p-3 animate-float-delayed">
                                 <div className="flex items-center gap-2">
                                     <Award className="w-4 h-4 text-[#696f64]" />
-                                    <span className="text-xs sm:text-sm font-medium text-gray-900">94% SCS</span>
+                                    <span className="text-xs sm:text-sm font-medium text-gray-900">94% SSC</span>
                                 </div>
                             </div>
                         </div>

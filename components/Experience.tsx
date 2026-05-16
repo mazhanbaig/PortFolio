@@ -165,7 +165,7 @@ export default function ExperienceSection() {
                             {/* Academic Achievement */}
                             <div className="bg-[#696f64]/5 rounded-xl border border-[#696f64]/20 p-6 text-center">
                                 <div className="text-3xl font-bold text-[#696f64] mb-2">94%</div>
-                                <p className="text-sm text-gray-700">SCS Distinction in Computer Science</p>
+                                <p className="text-sm text-gray-700">SSC Distinction in Computer Science</p>
                                 <p className="text-xs text-gray-500 mt-1">Academic Excellence Award</p>
                             </div>
                         </div>

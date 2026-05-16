@@ -59,7 +59,7 @@ export default function AboutSection() {
                                 from system design to deployment.
                             </p>
                             <p>
-                                My tech stack includes <span className="font-medium text-gray-900">React, Next.js, TypeScript,
+                                My tech stack includes <span className="font-medium text-gray-900">React, Next.js,React Native,JavaScript, TypeScript,
                                     Node.js, Express, NestJS, MongoDB, and Firebase</span>. I focus on building scalable solutions
                                 with modern best practices.
                             </p>
@@ -70,7 +70,7 @@ export default function AboutSection() {
                         </div>
 
                         {/* Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+                        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
                             {stats.map((stat, idx) => (
                                 <div
                                     key={idx}
@@ -85,7 +85,7 @@ export default function AboutSection() {
                                     </div>
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Right — Passions */}

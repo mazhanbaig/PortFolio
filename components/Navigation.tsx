@@ -53,7 +53,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-5xl py-2.5 px-4 md:px-6 bg-white/90 backdrop-blur-lg border border-gray-200 rounded-full shadow-sm transition-all duration-300 ${scrolled ? 'top-2 shadow-md' : 'top-4'}`}>
+            <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-6xl py-2.5 px-4 md:px-6 bg-white/90 backdrop-blur-lg border border-gray-200 rounded-full shadow-sm transition-all duration-300 ${scrolled ? 'top-2 shadow-md' : 'top-4'}`}>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleClick('#home')}>
                         <h1 className="text-xl sm:text-2xl font-bold text-[#696f64] tracking-tight">
