@@ -4,15 +4,18 @@ import Image from 'next/image'
 import { Github, Linkedin, Instagram, Download, Code, Award, Briefcase, MapPin, Mail, Sparkles, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import SplineScene from './SplineScene'
 import { personalInfo } from '@/constants/content'
 import { motion, Variants } from 'framer-motion'
 
 export default function HeroPortfolio() {
     const [typingText, setTypingText] = useState('')
-    const [imageLoaded, setImageLoaded] = useState(false)
+    // default to true so the fallback image is visible immediately
+    const [imageLoaded, setImageLoaded] = useState(true)
     const [currentTech, setCurrentTech] = useState(0)
 
     const fullText = ` ${personalInfo.title}`
+    const splineSceneUrl = process.env.NEXT_PUBLIC_SPLINE_SCENE || ''
     const techStacks = [
         "React.js · Next.js · TypeScript",
         "Node.js · Express.js · NestJS",
@@ -21,6 +24,8 @@ export default function HeroPortfolio() {
     ]
 
     useEffect(() => {
+        const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        console.log('[Hero] mounted - prefers-reduced-motion:', prefersReduced, 'splineSceneUrl:', splineSceneUrl)
         let index = 0
         const interval = setInterval(() => {
             setTypingText(prev => prev + fullText.charAt(index))
@@ -72,23 +77,23 @@ export default function HeroPortfolio() {
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
                     {/* Left Side - Content */}
-                    <motion.div 
+                    <motion.div
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
                         className="space-y-6 text-center lg:text-left order-2 lg:order-1"
                     >
                         {/* Badge */}
-                        <motion.div 
+                        <motion.div
                             variants={itemVariants}
-                            className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full w-fit mx-auto lg:mx-0 backdrop-blur-md"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full w-fit mx-auto lg:mx-0 backdrop-blur-md hover:bg-white/10 hover:border-white/20 transition-all duration-300 shadow-lg"
                         >
                             <Sparkles className="w-4 h-4 text-[#696f64]" />
                             <span className="text-sm font-medium text-gray-300">{personalInfo.tagline}</span>
                         </motion.div>
 
                         {/* Name */}
-                        <motion.h1 
+                        <motion.h1
                             variants={itemVariants}
                             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight"
                         >
@@ -119,7 +124,7 @@ export default function HeroPortfolio() {
                         </motion.div>
 
                         {/* Description */}
-                        <motion.p 
+                        <motion.p
                             variants={itemVariants}
                             className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0"
                         >
@@ -127,7 +132,7 @@ export default function HeroPortfolio() {
                         </motion.p>
 
                         {/* Stats */}
-                        <motion.div 
+                        <motion.div
                             variants={itemVariants}
                             className="flex justify-center lg:justify-start gap-6 sm:gap-8 pt-2"
                         >
@@ -146,51 +151,62 @@ export default function HeroPortfolio() {
                         </motion.div>
 
                         {/* CTA Buttons */}
-                        <motion.div 
+                        <motion.div
                             variants={itemVariants}
                             className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4"
                         >
-                            <a
+                            <motion.a
                                 href={personalInfo.cvUrl}
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-[#696f64] text-white font-medium rounded-full hover:bg-primary-sage-hover transition-all duration-300 shadow-lg"
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#696f64] to-[#555b4f] text-white font-medium rounded-full hover:from-[#555b4f] hover:to-[#4a5568] transition-all duration-300 shadow-lg backdrop-blur-sm border border-white/10"
                             >
                                 <Download className="w-4 h-4" />
                                 Download CV
-                            </a>
-                            <Link
-                                href="#projects"
-                                className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 hover:border-white/20 bg-white/5 text-gray-200 font-medium rounded-full hover:bg-white/10 transition-all duration-300"
+                            </motion.a>
+                            <motion.div
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
                             >
-                                View Projects
-                                <ChevronDown className="w-4 h-4" />
-                            </Link>
-                            <button
+                                <Link
+                                    href="#projects"
+                                    className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 bg-white/5 text-gray-200 font-medium rounded-full hover:bg-white/15 hover:border-white/30 transition-all duration-300 backdrop-blur-md shadow-lg"
+                                >
+                                    View Projects
+                                    <ChevronDown className="w-4 h-4" />
+                                </Link>
+                            </motion.div>
+                            <motion.button
                                 onClick={scrollToContact}
-                                className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 hover:border-white/20 bg-white/5 text-gray-200 font-medium rounded-full hover:bg-white/10 transition-all duration-300"
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 bg-white/5 text-gray-200 font-medium rounded-full hover:bg-white/15 hover:border-white/30 transition-all duration-300 backdrop-blur-md shadow-lg"
                             >
                                 <Mail className="w-4 h-4" />
                                 Hire Me
-                            </button>
+                            </motion.button>
                         </motion.div>
 
                         {/* Social Links */}
-                        <motion.div 
+                        <motion.div
                             variants={itemVariants}
                             className="flex items-center justify-center lg:justify-start gap-3 pt-4 text-gray-400"
                         >
                             {personalInfo.socials.map((social, idx) => {
                                 const SocialIcon = social.icon
                                 return (
-                                    <a
+                                    <motion.a
                                         key={idx}
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="p-2.5 rounded-full border border-white/10 bg-white/5 text-gray-300 hover:bg-[#696f64] hover:text-white hover:border-[#696f64] hover:-translate-y-1 transition-all duration-300"
+                                        className="p-2.5 rounded-full border border-white/20 bg-white/5 text-gray-300 hover:bg-[#696f64] hover:text-white hover:border-[#696f64] transition-all duration-300 backdrop-blur-md shadow-lg"
                                         aria-label={social.label}
+                                        whileHover={{ scale: 1.15, y: -3 }}
+                                        whileTap={{ scale: 0.95 }}
                                     >
                                         <SocialIcon className="w-5 h-5" />
-                                    </a>
+                                    </motion.a>
                                 )
                             })}
                             <div className="w-px h-6 bg-white/10 mx-1"></div>
@@ -208,30 +224,47 @@ export default function HeroPortfolio() {
                             <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-[#696f64]/30 to-emerald-900/10 blur opacity-70 animate-pulse-slow"></div>
 
                             {/* Main Image Container */}
-                            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl bg-[#0f0f12]">
-                                <Image
-                                    src="/Me.jpg"
-                                    alt={`${personalInfo.name} - Full-Stack Developer`}
-                                    fill
-                                    className={`object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                                    onLoad={() => setImageLoaded(true)}
-                                    priority
+                            {/* Spline scene if provided, otherwise fallback image */}
+                            {splineSceneUrl ? (
+                                <SplineScene
+                                    sceneUrl={splineSceneUrl}
+                                    className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl bg-[#0f0f12]"
                                 />
-                            </div>
+                            ) : (
+                                <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl bg-[#0f0f12]">
+                                    <Image
+                                        src="/Me.jpg"
+                                        alt={`${personalInfo.name} - Full-Stack Developer`}
+                                        fill
+                                        sizes="(max-width: 768px) 256px, (max-width: 1024px) 288px, 320px"
+                                        className={`object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                        onLoad={() => setImageLoaded(true)}
+                                        priority
+                                    />
+                                </div>
+                            )}
 
                             {/* Floating Badges */}
-                            <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 glass-panel rounded-xl shadow-xl p-2.5 sm:p-3 animate-float">
+                            <motion.div
+                                className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 glass-panel rounded-xl shadow-xl p-2.5 sm:p-3 animate-float"
+                                whileHover={{ scale: 1.1, y: -5 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
                                 <div className="flex items-center gap-2">
                                     <Code className="w-4 h-4 text-[#696f64]" />
                                     <span className="text-xs sm:text-sm font-semibold text-white">Full-Stack</span>
                                 </div>
-                            </div>
-                            <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 glass-panel rounded-xl shadow-xl p-2.5 sm:p-3 animate-float-delayed">
+                            </motion.div>
+                            <motion.div
+                                className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 glass-panel rounded-xl shadow-xl p-2.5 sm:p-3 animate-float-delayed"
+                                whileHover={{ scale: 1.1, y: 5 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
                                 <div className="flex items-center gap-2">
                                     <Award className="w-4 h-4 text-[#696f64]" />
                                     <span className="text-xs sm:text-sm font-semibold text-white">94% SSC</span>
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
