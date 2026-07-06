@@ -4,14 +4,15 @@ import Image from 'next/image'
 import { Github, Linkedin, Instagram, Download, Code, Award, Briefcase, MapPin, Mail, Sparkles, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { personalInfo } from '@/constants/content'
+import { motion, Variants } from 'framer-motion'
 
 export default function HeroPortfolio() {
     const [typingText, setTypingText] = useState('')
     const [imageLoaded, setImageLoaded] = useState(false)
     const [currentTech, setCurrentTech] = useState(0)
-    const [showFullText, setShowFullText] = useState(false)
 
-    const fullText = " Full-Stack Developer"
+    const fullText = ` ${personalInfo.title}`
     const techStacks = [
         "React.js · Next.js · TypeScript",
         "Node.js · Express.js · NestJS",
@@ -26,13 +27,12 @@ export default function HeroPortfolio() {
             index++
             if (index === fullText.length) {
                 clearInterval(interval)
-                setShowFullText(true)
             }
         }, 100)
 
         const techInterval = setInterval(() => {
             setCurrentTech(prev => (prev + 1) % techStacks.length)
-        }, 2500)
+        }, 3000)
 
         return () => {
             clearInterval(interval)
@@ -44,173 +44,192 @@ export default function HeroPortfolio() {
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
     }
 
-    const stats = [
-        { icon: Briefcase, value: "2+", label: "Years Experience" },
-        { icon: Code, value: "5+", label: "Projects Delivered" },
-        { icon: Award, value: "94%", label: "SSC Distinction" }
-    ]
+    const iconMap: { [key: string]: any } = {
+        Briefcase,
+        Code,
+        Award
+    }
+
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.1
+            }
+        }
+    }
+
+    const itemVariants: Variants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+    }
 
     return (
-        <section id="home" className="relative w-full min-h-screen flex items-center bg-gradient-to-br from-white via-gray-50 to-white overflow-hidden">
-
-            {/* Background Decorative Elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-[#696f64]/5 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#696f64]/3 rounded-full blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-[#696f64]/5 to-transparent rounded-full blur-3xl"></div>
-
-                {/* Grid Pattern */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(105,111,100,0.03)_1px,transparent_0)] bg-[size:40px_40px]"></div>
-            </div>
-
-            <div className="relative max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-20">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <section id="home" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
+            <div className="relative max-w-[1200px] mx-auto w-full z-10">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
                     {/* Left Side - Content */}
-                    <div className="space-y-6">
+                    <motion.div 
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="space-y-6 text-center lg:text-left order-2 lg:order-1"
+                    >
                         {/* Badge */}
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#696f64]/10 rounded-full w-fit">
+                        <motion.div 
+                            variants={itemVariants}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full w-fit mx-auto lg:mx-0 backdrop-blur-md"
+                        >
                             <Sparkles className="w-4 h-4 text-[#696f64]" />
-                            <span className="text-sm font-medium text-[#696f64]">Available for opportunities</span>
-                        </div>
+                            <span className="text-sm font-medium text-gray-300">{personalInfo.tagline}</span>
+                        </motion.div>
 
                         {/* Name */}
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                        <motion.h1 
+                            variants={itemVariants}
+                            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight"
+                        >
                             Muhammad <span className="text-[#696f64]">Azhan</span> Baig
-                        </h1>
+                        </motion.h1>
 
                         {/* Typing Title */}
-                        <div className="h-12">
-                            <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700">
+                        <motion.div variants={itemVariants} className="h-12 flex justify-center lg:justify-start items-center">
+                            <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-300">
                                 {typingText}
-                                <span className="inline-block w-1 h-7 ml-1 bg-[#696f64] animate-blink"></span>
+                                <span className="inline-block w-1 h-6 ml-1.5 align-middle bg-[#696f64] animate-blink"></span>
                             </h2>
-                        </div>
+                        </motion.div>
 
                         {/* Animated Tech Stack */}
-                        {/* <div className="h-8 overflow-hidden">
+                        <motion.div variants={itemVariants} className="h-8 overflow-hidden relative w-full max-w-sm mx-auto lg:mx-0">
                             <div
                                 className="transition-transform duration-500 ease-in-out"
                                 style={{ transform: `translateY(-${currentTech * 100}%)` }}
                             >
                                 {techStacks.map((tech, i) => (
-                                    <div key={i} className="h-8 flex items-center gap-2">
+                                    <div key={i} className="h-8 flex items-center justify-center lg:justify-start gap-2">
                                         <Code className="w-4 h-4 text-[#696f64]" />
-                                        <span className="text-gray-600 text-sm sm:text-base">{tech}</span>
+                                        <span className="text-gray-400 text-sm sm:text-base font-medium">{tech}</span>
                                     </div>
                                 ))}
                             </div>
-                        </div> */}
+                        </motion.div>
 
                         {/* Description */}
-                        <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-lg">
-                            Results-driven Full-Stack Developer with 2+ years of experience architecting
-                            and shipping production-grade web and mobile applications. I build scalable,
-                            high-performance solutions with modern technologies.
-                        </p>
+                        <motion.p 
+                            variants={itemVariants}
+                            className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0"
+                        >
+                            {personalInfo.bio[0]}
+                        </motion.p>
 
                         {/* Stats */}
-                        <div className="flex gap-6 pt-2">
-                            {stats.map((stat, idx) => (
-                                <div key={idx} className="text-center">
-                                    <div className="text-2xl sm:text-3xl font-bold text-[#696f64]">{stat.value}</div>
-                                    <div className="text-xs sm:text-sm text-gray-500">{stat.label}</div>
-                                </div>
-                            ))}
-                        </div>
+                        <motion.div 
+                            variants={itemVariants}
+                            className="flex justify-center lg:justify-start gap-6 sm:gap-8 pt-2"
+                        >
+                            {personalInfo.stats.map((stat, idx) => {
+                                const StatIcon = iconMap[stat.icon.name] || stat.icon
+                                return (
+                                    <div key={idx} className="text-center lg:text-left">
+                                        <div className="text-2xl sm:text-3xl font-bold text-white flex items-center justify-center lg:justify-start gap-1.5">
+                                            <StatIcon className="w-4 h-4 text-[#696f64] inline-block" />
+                                            {stat.value}
+                                        </div>
+                                        <div className="text-xs sm:text-sm text-gray-400 mt-0.5">{stat.label}</div>
+                                    </div>
+                                )
+                            })}
+                        </motion.div>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-wrap gap-4 pt-2">
+                        <motion.div 
+                            variants={itemVariants}
+                            className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4"
+                        >
                             <a
-                                href="/cv.pdf"
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-[#696f64] text-white font-medium rounded-full hover:bg-[#555b4f] transition-all duration-300 shadow-md hover:shadow-lg"
+                                href={personalInfo.cvUrl}
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-[#696f64] text-white font-medium rounded-full hover:bg-primary-sage-hover transition-all duration-300 shadow-lg"
                             >
                                 <Download className="w-4 h-4" />
                                 Download CV
                             </a>
                             <Link
                                 href="#projects"
-                                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-[#696f64] text-[#696f64] font-medium rounded-full hover:bg-[#696f64] hover:text-white transition-all duration-300"
+                                className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 hover:border-white/20 bg-white/5 text-gray-200 font-medium rounded-full hover:bg-white/10 transition-all duration-300"
                             >
                                 View Projects
                                 <ChevronDown className="w-4 h-4" />
                             </Link>
                             <button
                                 onClick={scrollToContact}
-                                className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-full hover:bg-gray-100 transition-all duration-300"
+                                className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 hover:border-white/20 bg-white/5 text-gray-200 font-medium rounded-full hover:bg-white/10 transition-all duration-300"
                             >
                                 <Mail className="w-4 h-4" />
                                 Hire Me
                             </button>
-                        </div>
+                        </motion.div>
 
                         {/* Social Links */}
-                        <div className="flex gap-3 pt-4">
-                            <a
-                                href="https://github.com/mazhanbaig"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-2.5 rounded-full bg-gray-100 text-gray-700 hover:bg-[#696f64] hover:text-white transition-all duration-300"
-                                aria-label="GitHub"
-                            >
-                                <Github className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/muhammad-azhan-baig-a3b46a288"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-2.5 rounded-full bg-gray-100 text-gray-700 hover:bg-[#696f64] hover:text-white transition-all duration-300"
-                                aria-label="LinkedIn"
-                            >
-                                <Linkedin className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-2.5 rounded-full bg-gray-100 text-gray-700 hover:bg-[#696f64] hover:text-white transition-all duration-300"
-                                aria-label="Instagram"
-                            >
-                                <Instagram className="w-5 h-5" />
-                            </a>
-                            <div className="w-px h-8 bg-gray-200 mx-1"></div>
-                            <div className="flex items-center gap-2 text-sm text-gray-500">
-                                <MapPin className="w-4 h-4" />
-                                <span>Karachi, Pakistan</span>
+                        <motion.div 
+                            variants={itemVariants}
+                            className="flex items-center justify-center lg:justify-start gap-3 pt-4 text-gray-400"
+                        >
+                            {personalInfo.socials.map((social, idx) => {
+                                const SocialIcon = social.icon
+                                return (
+                                    <a
+                                        key={idx}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="p-2.5 rounded-full border border-white/10 bg-white/5 text-gray-300 hover:bg-[#696f64] hover:text-white hover:border-[#696f64] hover:-translate-y-1 transition-all duration-300"
+                                        aria-label={social.label}
+                                    >
+                                        <SocialIcon className="w-5 h-5" />
+                                    </a>
+                                )
+                            })}
+                            <div className="w-px h-6 bg-white/10 mx-1"></div>
+                            <div className="flex items-center gap-2 text-sm text-gray-400">
+                                <MapPin className="w-4 h-4 text-[#696f64]" />
+                                <span>{personalInfo.location}</span>
                             </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
 
                     {/* Right Side - Image & Badges */}
-                    <div className="relative flex justify-center lg:justify-end">
+                    <div className="relative flex justify-center lg:justify-end order-1 lg:order-2">
                         <div className="relative">
-                            {/* Decorative rings */}
-                            <div className="absolute -top-4 -left-4 w-full h-full rounded-full border-2 border-[#696f64]/20 animate-pulse-slow"></div>
-                            <div className="absolute -bottom-4 -right-4 w-full h-full rounded-full border-2 border-[#696f64]/10"></div>
+                            {/* Decorative glowing gradient ring */}
+                            <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-[#696f64]/30 to-emerald-900/10 blur opacity-70 animate-pulse-slow"></div>
 
-                            {/* Main Image */}
-                            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl bg-gradient-to-br from-gray-100 to-gray-200">
+                            {/* Main Image Container */}
+                            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl bg-[#0f0f12]">
                                 <Image
                                     src="/Me.jpg"
-                                    alt="Muhammad Azhan Baig - Full-Stack Developer"
+                                    alt={`${personalInfo.name} - Full-Stack Developer`}
                                     fill
-                                    className={`object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                                     onLoad={() => setImageLoaded(true)}
                                     priority
                                 />
                             </div>
 
                             {/* Floating Badges */}
-                            <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 bg-white rounded-xl shadow-lg p-2 sm:p-3 animate-float">
+                            <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 glass-panel rounded-xl shadow-xl p-2.5 sm:p-3 animate-float">
                                 <div className="flex items-center gap-2">
                                     <Code className="w-4 h-4 text-[#696f64]" />
-                                    <span className="text-xs sm:text-sm font-medium text-gray-900">Full-Stack</span>
+                                    <span className="text-xs sm:text-sm font-semibold text-white">Full-Stack</span>
                                 </div>
                             </div>
-                            <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 bg-white rounded-xl shadow-lg p-2 sm:p-3 animate-float-delayed">
+                            <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 glass-panel rounded-xl shadow-xl p-2.5 sm:p-3 animate-float-delayed">
                                 <div className="flex items-center gap-2">
                                     <Award className="w-4 h-4 text-[#696f64]" />
-                                    <span className="text-xs sm:text-sm font-medium text-gray-900">94% SSC</span>
+                                    <span className="text-xs sm:text-sm font-semibold text-white">94% SSC</span>
                                 </div>
                             </div>
                         </div>
@@ -218,43 +237,35 @@ export default function HeroPortfolio() {
                 </div>
 
                 {/* Scroll Indicator */}
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce-slow">
-                    <span className="text-xs text-gray-400">Scroll to explore</span>
-                    <ChevronDown className="w-4 h-4 text-gray-400" />
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 animate-bounce-slow opacity-60">
+                    <span className="text-xs text-gray-400 tracking-widest uppercase">Scroll to explore</span>
+                    <ChevronDown className="w-4 h-4 text-[#696f64]" />
                 </div>
             </div>
 
             <style jsx>{`
-                @keyframes blink {
-                    0%, 100% { opacity: 1; }
-                    50% { opacity: 0; }
-                }
                 .animate-blink {
-                    animation: blink 1s infinite;
-                }
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-10px); }
+                    animation: blink 0.9s step-end infinite;
                 }
                 .animate-float {
-                    animation: float 4s ease-in-out infinite;
+                    animation: float 5s ease-in-out infinite;
                 }
                 .animate-float-delayed {
-                    animation: float 4s ease-in-out infinite 1s;
+                    animation: float-delayed 5s ease-in-out infinite;
                 }
                 @keyframes bounce-slow {
                     0%, 100% { transform: translateY(0px) translateX(-50%); }
                     50% { transform: translateY(10px) translateX(-50%); }
                 }
                 .animate-bounce-slow {
-                    animation: bounce-slow 2s ease-in-out infinite;
+                    animation: bounce-slow 2.5s ease-in-out infinite;
                 }
                 @keyframes pulse-slow {
-                    0%, 100% { opacity: 0.3; transform: scale(1); }
-                    50% { opacity: 0.6; transform: scale(1.05); }
+                    0%, 100% { opacity: 0.5; transform: scale(1); }
+                    50% { opacity: 0.8; transform: scale(1.03); }
                 }
                 .animate-pulse-slow {
-                    animation: pulse-slow 3s ease-in-out infinite;
+                    animation: pulse-slow 4s ease-in-out infinite;
                 }
             `}</style>
         </section>

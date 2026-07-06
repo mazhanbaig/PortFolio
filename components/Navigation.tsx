@@ -1,8 +1,9 @@
-// components/Navbar.tsx (Fixed for better scrolling)
+// components/Navigation.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
 import { Menu, X, Home, User, Folder, Mail, Briefcase, Code, ArrowRight, Sparkles } from 'lucide-react'
+import { personalInfo } from '@/constants/content'
 
 const navItems = [
     { name: 'Home', href: '#home', icon: Home },
@@ -53,13 +54,13 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-6xl py-2.5 px-4 md:px-6 bg-white/90 backdrop-blur-lg border border-gray-200 rounded-full shadow-sm transition-all duration-300 ${scrolled ? 'top-2 shadow-md' : 'top-4'}`}>
+            <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-6xl py-2.5 px-4 md:px-6 bg-[#0f0f12]/60 backdrop-blur-md border border-white/10 rounded-full shadow-lg transition-all duration-300 ${scrolled ? 'top-2 shadow-xl bg-[#0f0f12]/85' : 'top-4'}`}>
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleClick('#home')}>
-                        <h1 className="text-xl sm:text-2xl font-bold text-[#696f64] tracking-tight">
-                            Azhan.
+                        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                            Azhan<span className="text-[#696f64]">.</span>
                         </h1>
-                        <Sparkles className="w-3.5 h-3.5 text-gray-400" />
+                        <Sparkles className="w-3.5 h-3.5 text-gray-500 animate-pulse" />
                     </div>
 
                     {/* Desktop Menu */}
@@ -70,10 +71,10 @@ export default function Navbar() {
                                 <button
                                     key={item.name}
                                     onClick={() => handleClick(item.href)}
-                                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all
+                                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-250
                                         ${isActive
-                                            ? 'bg-[#696f64] text-white shadow-sm'
-                                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                                            ? 'bg-[#696f64] text-white shadow-md'
+                                            : 'text-gray-300 hover:text-white hover:bg-white/5'
                                         }`}
                                 >
                                     <item.icon className="w-3.5 h-3.5" />
@@ -86,23 +87,26 @@ export default function Navbar() {
                     {/* Mobile Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden p-2 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition"
+                        className="md:hidden p-2 rounded-full border border-white/10 bg-[#16161a] hover:bg-white/5 transition"
                     >
-                        {isOpen ? <X className="w-5 h-5 text-gray-900" /> : <Menu className="w-5 h-5 text-gray-900" />}
+                        {isOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
                     </button>
                 </div>
             </nav>
 
             {/* Mobile Menu */}
-            <div className={`fixed inset-0 z-40 md:hidden transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-                <div className="absolute top-0 right-0 h-full w-80 bg-white border-l border-gray-200 shadow-xl p-6 flex flex-col">
+            <div className={`fixed inset-0 z-45 md:hidden transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                {/* Backdrop overlay */}
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setIsOpen(false)}></div>
+
+                <div className="absolute top-0 right-0 h-full w-80 bg-[#0f0f12] border-l border-white/10 shadow-2xl p-6 flex flex-col z-50">
                     <div className="flex items-center justify-between mb-8">
                         <div>
-                            <h2 className="font-bold text-gray-900">Azhan Baig</h2>
-                            <p className="text-xs text-gray-500">Full-Stack Developer</p>
+                            <h2 className="font-bold text-white text-lg">{personalInfo.name}</h2>
+                            <p className="text-xs text-gray-400">{personalInfo.title}</p>
                         </div>
-                        <button onClick={() => setIsOpen(false)} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-100">
-                            <X className="w-5 h-5 text-gray-900" />
+                        <button onClick={() => setIsOpen(false)} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 text-white">
+                            <X className="w-5 h-5" />
                         </button>
                     </div>
 
@@ -114,7 +118,7 @@ export default function Navbar() {
                                     key={item.name}
                                     onClick={() => handleClick(item.href)}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all
-                                        ${isActive ? 'bg-[#696f64] text-white' : 'text-gray-700 hover:bg-gray-100'}
+                                        ${isActive ? 'bg-[#696f64] text-white shadow-md' : 'text-gray-300 hover:bg-white/5'}
                                     `}
                                 >
                                     <item.icon className="w-4 h-4" />

@@ -1,1 +1,101 @@
 @import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #070708;
+  --color-dark-surface: #0f0f12;
+  --color-primary-sage: #696f64;
+  --color-primary-sage-hover: #555b4f;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float-delayed 6s ease-in-out infinite;
+  --animate-blink: blink 1s step-end infinite;
+  --animate-gradient-shift: gradient-shift 15s ease infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1.5deg); }
+  }
+  @keyframes float-delayed {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(12px) rotate(-1.5deg); }
+  }
+  @keyframes blink {
+    from, to { background-color: transparent }
+    50% { background-color: var(--color-primary-sage) }
+  }
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070708;
+}
+::-webkit-scrollbar-thumb {
+  background: #1b1b22;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #25252e;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+  background-color: #070708;
+}
+
+body {
+  background-color: #070708;
+  color: #f3f4f6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Noise Utility */
+.bg-noise {
+  background-image: url('/noise.svg');
+  background-repeat: repeat;
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: rgba(15, 15, 18, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(15, 15, 18, 0.75);
+  border-color: rgba(105, 111, 100, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px 1px rgba(105, 111, 100, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(105, 111, 100, 0.3);
+  color: #ffffff;
+}
+
+/* Animation utility helpers */
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-3000 {
+  animation-delay: 3s;
+}

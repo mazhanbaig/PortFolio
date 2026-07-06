@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
-const inter = Inter({ subsets: ['latin'] })
+
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700']
+})
 
 export const metadata: Metadata = {
   title: 'M AZHAN | Creative Developer',
@@ -16,16 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} bg-dark-bg text-white overflow-x-hidden`}>
+      <body className={`${spaceGrotesk.className} bg-dark-bg text-white overflow-x-hidden relative min-h-screen`}>
         <Navigation />
-        <main className="relative">
-          {/* Ambient Background */}
-          <div className="fixed inset-0 bg-gradient-to-br from-dark-bg via-black to-dark-surface opacity-50"></div>
-          <div className="fixed inset-0 bg-noise opacity-5 pointer-events-none"></div>
-
-          <div className="relative z-10">
-            {children}
-          </div>
+        <main className="relative z-10">
+          {children}
         </main>
       </body>
     </html>

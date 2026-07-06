@@ -1,82 +1,93 @@
 'use client'
 
-import { Mail, Phone, MapPin, Github, Linkedin, Instagram } from 'lucide-react'
+import { Mail, Phone, MapPin } from 'lucide-react'
+import { personalInfo } from '@/constants/content'
 
 export default function ContactSection() {
-    const socialLinks = [
-        { icon: Github, href: "https://github.com/mazhanbaig", label: "GitHub" },
-        { icon: Linkedin, href: "https://www.linkedin.com/in/muhammad-azhan-baig-a3b46a288", label: "LinkedIn" },
-        { icon: Instagram, href: "https://instagram.com", label: "Instagram" }
-    ]
-
     return (
-        <section id="contact" className="bg-white py-10 md:py-10 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
+        <section id="contact" className="bg-transparent py-16 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <div className="max-w-4xl mx-auto text-center relative z-10">
                 {/* Header */}
                 <div className="mb-16">
                     <div className="flex items-center justify-center gap-2 mb-4">
                         <div className="w-6 h-px bg-[#696f64]"></div>
-                        <span className="text-sm font-medium text-[#696f64] uppercase tracking-wider">
+                        <span className="text-sm font-semibold text-[#696f64] uppercase tracking-widest">
                             Contact
                         </span>
                         <div className="w-6 h-px bg-[#696f64]"></div>
                     </div>
 
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
                         Let's Connect
                     </h2>
 
-                    <p className="text-gray-600 max-w-xl mx-auto">
+                    <p className="text-gray-400 max-w-xl mx-auto text-base">
                         I’m open to collaboration, new opportunities, or just a friendly chat. Feel free to reach out!
                     </p>
                 </div>
 
-                {/* Contact Info */}
-                <div className="px-2 grid grid-cols-2 sm:grid-cols-3 gap-3 mb-12">
-                    <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-3">
-                            <Mail className="w-5 h-5 text-[#696f64]" />
+                {/* Contact Info Grid */}
+                <div className="px-2 grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+                    {/* Email Card */}
+                    <div className="flex flex-col items-center glass-panel p-6 rounded-2xl border border-white/10 hover:border-[#696f64]/40 transition duration-300">
+                        <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-[#696f64]">
+                            <Mail className="w-5 h-5" />
                         </div>
-                        <p className="text-gray-900 font-medium">Email</p>
-                        <p className="text-gray-600 text-sm mt-1">mazhanbaig44@gmail.com</p>
+                        <p className="text-white font-bold">Email</p>
+                        <a 
+                            href={`mailto:${personalInfo.email}`} 
+                            className="text-gray-400 hover:text-white text-sm mt-1.5 transition break-all px-2"
+                        >
+                            {personalInfo.email}
+                        </a>
                     </div>
 
-                    <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-3">
-                            <Phone className="w-5 h-5 text-[#696f64]" />
+                    {/* Phone Card */}
+                    <div className="flex flex-col items-center glass-panel p-6 rounded-2xl border border-white/10 hover:border-[#696f64]/40 transition duration-300">
+                        <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-[#696f64]">
+                            <Phone className="w-5 h-5" />
                         </div>
-                        <p className="text-gray-900 font-medium">Phone</p>
-                        <p className="text-gray-600 text-sm mt-1">+92 322 6045971</p>
+                        <p className="text-white font-bold">Phone</p>
+                        <a 
+                            href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`} 
+                            className="text-gray-400 hover:text-white text-sm mt-1.5 transition"
+                        >
+                            {personalInfo.phone}
+                        </a>
                     </div>
 
-                    <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-3">
-                            <MapPin className="w-5 h-5 text-[#696f64]" />
+                    {/* Location Card */}
+                    <div className="flex flex-col items-center glass-panel p-6 rounded-2xl border border-white/10 hover:border-[#696f64]/40 transition duration-300">
+                        <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-[#696f64]">
+                            <MapPin className="w-5 h-5" />
                         </div>
-                        <p className="text-gray-900 font-medium">Location</p>
-                        <p className="text-gray-600 text-sm mt-1">Karachi, Pakistan</p>
+                        <p className="text-white font-bold">Location</p>
+                        <p className="text-gray-400 text-sm mt-1.5">{personalInfo.location}</p>
                     </div>
                 </div>
 
                 {/* Social Links */}
-                <div className="flex justify-center gap-6">
-                    {socialLinks.map((social, idx) => (
-                        <a
-                            key={idx}
-                            href={social.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center text-gray-700 hover:bg-[#696f64] hover:text-white hover:border-[#696f64] transition-all"
-                            aria-label={social.label}
-                        >
-                            <social.icon className="w-5 h-5" />
-                        </a>
-                    ))}
+                <div className="flex justify-center gap-4">
+                    {personalInfo.socials.map((social, idx) => {
+                        const SocialIcon = social.icon
+                        return (
+                            <a
+                                key={idx}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-gray-300 hover:bg-[#696f64] hover:text-white hover:border-[#696f64] hover:-translate-y-1 transition-all duration-300 shadow-md"
+                                aria-label={social.label}
+                            >
+                                <SocialIcon className="w-5 h-5" />
+                            </a>
+                        )
+                    })}
                 </div>
 
                 {/* Footer Note */}
-                <p className="text-gray-500 text-sm mt-12">
-                    &copy; {new Date().getFullYear()} Muhammad Azhan Baig. All rights reserved.
+                <p className="text-gray-500 text-sm mt-16 tracking-wider">
+                    &copy; {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
                 </p>
             </div>
         </section>
